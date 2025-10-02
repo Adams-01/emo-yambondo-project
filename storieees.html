@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Impact Stories Tab - Three Card Grid</title>
+
+    <style>
+        /* --- Internal CSS Starts Here --- */
+
+        :root {
+            /* Define New Brand Colors */
+            --primary-color: #ff6b6b; /* Bright Coral/Red for highlight */
+            --secondary-color: #20c997; /* Teal for CTAs */
+            --dark-background: #343a40; /* Dark container background */
+            --light-text: #f8f9fa; /* Light text on dark background */
+            --body-background: #e9ecef;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--body-background);
+            color: #333;
+            margin: 0;
+            padding: 30px 20px;
+        }
+
+        .stories-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: var(--dark-background);
+            color: var(--light-text);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 3rem;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #adb5bd;
+            margin-bottom: 40px;
+            font-size: 1.3rem;
+            font-style: italic;
+        }
+
+        /* --- Tab Navigation Styling (Segmented Control Look) --- */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #495057;
+            border-radius: 8px;
+            padding: 5px;
+            margin-bottom: 40px;
+            flex-wrap: wrap; 
+        }
+
+        .tab-button {
+            background-color: transparent;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--light-text);
+            transition: all 0.3s;
+            border-radius: 6px;
+            margin: 3px;
+        }
+
+        .tab-button.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- Tab Content & Grid Styling --- */
+        .tab-content {
+            display: none; 
+            padding: 20px 0;
+            animation: fadeIn 0.6s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .story-grid {
+            /* Set to exactly 3 columns on desktop */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 25px;
+        }
+
+        .story-card {
+            background-color: #495057;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .story-card img {
+            width: 100%;
+            height: 200px; 
+            object-fit: cover;
+        }
+
+        .story-info {
+            padding: 15px;
+            min-height: 180px;
+        }
+
+        .story-info h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            font-size: 1.3rem; 
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .story-info p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #ced4da;
+            margin-bottom: 15px;
+        }
+
+        .story-info .cta {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px; 
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 992px) {
+            /* Change to 2 columns on tablets */
+            .story-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .story-info {
+                min-height: 160px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            /* Change to 1 column on phones */
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+            .tab-nav {
+                flex-direction: column;
+            }
+            .tab-button {
+                width: 100%;
+            }
+        }
+
+        /* --- Internal CSS Ends Here --- */
+    </style>
+</head>
+<body>
+
+    <div class="stories-section">
+        <h1>Stories That Inspire Change</h1>
+        <p class="tagline">The three most recent impacts made possible by your support.</p>
+
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="openTab(event, 'beneficiary-success')">Success Stories</button>
+            <button class="tab-button" onclick="openTab(event, 'volunteer-highlights')">Volunteer Profiles</button>
+            <button class="tab-button" onclick="openTab(event, 'donor-impact')">Donor Chronicles</button>
+        </div>
+
+        <div id="beneficiary-success" class="tab-content active">
+            <div class="story-grid">
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of Leya reading a book">
+                    <div class="story-info">
+                        <h3>Leya Finds Her Voice</h3>
+                        <p>Through our literacy program, Leya went from non-reader to top of her class in six months. **Impact:** $25 funds books for one child.</p>
+                        <a href="#" class="cta">Read Leya's Story &rarr;</a>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of a newly built shelter">
+                    <div class="story-info">
+                        <h3>Safe Home for the Mwangi Family</h3>
+                        <p>They received housing support and job training after a disaster. They are now financially stable. **Impact:** Security leads to stability.</p>
+                        <a href="#" class="cta">Support Housing &rarr;</a>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of a farmer harvesting crops">
+                    <div class="story-info">
+                        <h3>Elias's Harvest Triumph</h3>
+                        <p>Provided with new drought-resistant seeds, Elias doubled his harvest this season. **Impact:** Economic self-reliance for his community.</p>
+                        <a href="#" class="cta">Fund Agriculture &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="volunteer-highlights" class="tab-content">
+            <div class="story-grid">
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of a volunteer doctor">
+                    <div class="story-info">
+                        <h3>Dr. Kenji: Clinic Hero</h3>
+                        <p>Dr. Kenji volunteers his medical expertise every Sunday, offering free checkups to over 80 patients monthly. **Impact:** 3000 hours donated annually.</p>
+                        <a href="#" class="cta">Meet Dr. Kenji &rarr;</a>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of a youth coach with children">
+                    <div class="story-info">
+                        <h3>Coach Sam: Guiding the Youth</h3>
+                        <p>Coach Sam runs our after-school sports league, mentoring young teens on teamwork and discipline. **Impact:** 90% program retention rate.</p>
+                        <a href="#" class="cta">Read Volunteer Stories &rarr;</a>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of a volunteer organizing supplies">
+                    <div class="story-info">
+                        <h3>Anna: The Logistics Wizard</h3>
+                        <p>Anna manages all supply chain logistics, ensuring 100% of aid reaches its destination on time. **Impact:** Efficiency saves lives and resources.</p>
+                        <a href="#" class="cta">Join Our Team &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="donor-impact" class="tab-content">
+            <div class="story-grid">
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of a donor speaking">
+                    <div class="story-info">
+                        <h3>The Green Family Fund</h3>
+                        <p>Their recurring monthly gifts ensure stability, covering administrative costs so aid goes directly to the field. **Impact:** Sustainable funding model.</p>
+                        <a href="#" class="cta">Become a Sustainer &rarr;</a>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of a handshake">
+                    <div class="story-info">
+                        <h3>TechCorp's Gift to Efficiency</h3>
+                        <p>TechCorp donated software licenses, allowing our team to manage data more effectively and save $5,000 annually. **Impact:** Technology amplifies our mission.</p>
+                        <a href="#" class="cta">Become a Partner &rarr;</a>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="emo.jpeg.png" alt="Photo of a memorial plaque">
+                    <div class="story-info">
+                        <h3>Mrs. Helen's Lasting Legacy</h3>
+                        <p>Her generous bequest fully funded the new community center library, serving thousands of children for years to come. **Impact:** A lasting, profound difference.</p>
+                        <a href="#" class="cta">Plan Your Legacy &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* --- Internal JavaScript Starts Here --- */
+
+        /**
+         * Function to open a specific tab and manage active states for buttons and content.
+         * @param {Event} evt - The click event object.
+         * @param {string} tabName - The ID of the tab content to display.
+         */
+        function openTab(evt, tabName) {
+            var i, tabContent, tabButtons;
+
+            // 1. Hide all tab content
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove('active');
+            }
+             
+           
+
+            // 2. Deactivate all tab buttons
+            tabButtons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+
+            // 3. Show the current tab content and set the corresponding button as active
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // Initialization: Ensure the correct tab is displayed on page load
+        document.addEventListener('DOMContentLoaded', (event) => {
+             // Find the button for the default tab ('beneficiary-success')
+            const initialTabButton = document.querySelector('.tab-button[onclick*="beneficiary-success"]');
+            const initialTabContent = document.getElementById('beneficiary-success');
+            
+            // Set the initial active state
+            if (initialTabButton && initialTabContent) {
+                initialTabButton.classList.add('active');
+                initialTabContent.classList.add('active');
+            }
+        });
+
+        /* --- Internal JavaScript Ends Here --- */
+    </script>
+</body>
+</html>
